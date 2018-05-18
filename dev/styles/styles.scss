@@ -1,0 +1,14 @@
+@import 'utils';
+
+body {
+    margin: 0;
+}
+
+.header {
+    position: relative;
+    &__title {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+    }
+}
