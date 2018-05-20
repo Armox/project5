@@ -4,6 +4,8 @@ body {
     margin: 0;
 }
 
+
+
 .header {
     position: relative;
     &__title {
@@ -12,3 +14,20 @@ body {
         left: 50%;
     }
 }
+
+.main-wrapper {
+    width: 100%;
+    height: 75vh;
+    position: relative;
+}
+
+.introBox {
+    background: $lake_blue;
+    width: 60%;
+    height: 65vh;
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+    top: 10%;
+}
+
