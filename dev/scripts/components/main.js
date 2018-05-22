@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
-import IntroBox from './intro_box'
+import React from 'react';
+import IntroBox from './intro_box';
+import ResultsBox from './results_box';
+
+
 const Main = (props) => {
-    
-    console.log(props.phase)
-    let $DisplayBox;
+    let DisplayBox;
     if(props.phase < 2){
-        console.log('hit')
-        $DisplayBox = <IntroBox countryList={props.countryList} setStateCuisine={props.setStateCuisine} />
+        DisplayBox = <IntroBox countryList={props.countryList} setStateCuisine={props.setStateCuisine}/>
     } else {
-        $DisplayBox = <div></div>
+        DisplayBox = <ResultsBox countryList={props.countryList} cuisineSelected={props.cuisineSelected}/>
     }
 
 
     return(
-        $DisplayBox
+        <div>
+            {DisplayBox}
+        </div>
     )
 }
 
