@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SelectInput from './select_input'
 
 const IntroBox = (props) => {
