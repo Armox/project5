@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Map from './components/map';
 import Main from './components/main';
 import countriesArr from './api_terms';
-import axios from 'axios';
 
 class App extends React.Component {
   constructor(props){
@@ -11,45 +10,29 @@ class App extends React.Component {
     this.state = {
     phase: 1,
     cuisineSelected: '',
-    beers: {}
     }
     this.setStateCuisine = this.setStateCuisine.bind(this);
-    this.getBeer = this.getBeer.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   
-  setStateCuisine(e){
-    e.preventDefault();
-    console.log(e.target.value);
-    this.getBeer(e.target.value);
+  setStateCuisine(e){ 
     this.setState({
       cuisineSelected: e.target.value,
-      phase: 2
+      phase: this.state.phase + 1
     });
   }
 
-  getBeer (cuisine){
-    const countryName = countriesArr.map((countryObj)=>{
-      console.log(countryObj.cuisineType)
-      if(countryObj.cuisineType === cuisine){
-        return countryObj.lcbo
-      }
-    });
-    axios.get('http://lcboapi.com/products', {
-      params: {
-        access_key: 'MDowZTRkM2RjYy0yZDZmLTExZTgtOWE5ZC1iMzZjYmI4MWYzOWE6YzlOMEFQdzF3TTFFSjZsWFA5ejd3Tzg5bzc1Rnd4Z0E0UWhN',
-        q: `beer ${countryName}`,
-        dataType: 'json'
-      }
-    })
-    .then((res)=>{
-      this.setState({
-        beers: res
-      });
-    })
-  }
-
-  getResto() {
-    axios.get()
+  handleClick(e) {
+    console.log(e.target.id)
+    if(e.target.id === 'beerPrev'){
+      console.log('BEER BACK')
+    } else if (e.target.id === 'beerNext'){
+      console.log('BEER NEXT')
+    } else if (e.target.id === 'restoNext'){
+      console.log('NEXT RESTO')
+    } else if (e.target.id === 'restoPrev') {
+      console.log('RESTO BACK')
+    }
   }
 
   render() {
@@ -58,12 +41,31 @@ class App extends React.Component {
       <div>
         <Map/>
         <div className='main-wrapper'>
+          <i 
+            className="far fa-caret-square-right fa-flip-horizontal" 
+            id='beerPrev' 
+            onClick={(e)=>this.handleClick(e)}>
+          </i>
+          <i 
+            className="far fa-caret-square-right fa-flip-horizontal" 
+            id='restoPrev' 
+            onClick={this.handleClick}></i>
           <Main 
             phase={this.state.phase}
-            showResultsBox={this.state.showResultsBox} 
             setStateCuisine={this.setStateCuisine}
             countryList={countriesArr}
-            getBeer={this.getBeer} />
+            cuisineSelected={this.state.cuisineSelected}
+            />
+          <i 
+            className="far fa-caret-square-right" 
+            id='beerNext' 
+            onClick={this.handleClick}>
+          </i>
+          <i 
+            className="far fa-caret-square-right" 
+            id='restoNext' 
+            onClick={this.handleClick}>
+          </i>
         </div>
       </div>
     )
