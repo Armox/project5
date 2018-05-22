@@ -8,7 +8,7 @@ const SelectInput = (props) => {
     
     return(
         <form action="">
-            <select onChange={(e) => props.setStateCuisine(e)}>
+            <select onChange={(e) => {  props.setStateCuisine(e);}}>
                 {cuisineTypes.map((cuisine, i) => {
                     return <option key={i}>{cuisine}</option>
                 })}
@@ -18,4 +18,3 @@ const SelectInput = (props) => {
 }
 
 export default SelectInput;
-
